@@ -3,11 +3,11 @@ import {Draggable} from "react-beautiful-dnd";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    task: {
-        padding: theme.spacing(2),
-        backgroundColor: '#fff',
-        borderTop: '1px solid cyan',
-    }
+  task: {
+    padding: theme.spacing(2),
+    backgroundColor: "#fff",
+    borderTop: "1px solid #35B1A7",
+  },
 }));
 
 const Task = ({id, text}) => {

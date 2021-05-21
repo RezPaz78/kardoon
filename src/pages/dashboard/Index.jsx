@@ -2,8 +2,6 @@ import React from 'react';
 import {DragDropContext} from "react-beautiful-dnd";
 import ColumnTasks from "./components/ColumnTasks";
 import Grid from "@material-ui/core/Grid";
-import NavBar from "../../components/NavBar";
-import SideBar from "../../components/SideBar";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,11 +40,6 @@ const Ali = () => {
 
     return (
         <DragDropContext onDragEnd={()=> console.log('hey')}>
-            {/*<div className={classes.container}>*/}
-            {/*    <ColumnTasks id={1} name='To Do' taskList={temp[0]}/>*/}
-            {/*    <ColumnTasks id={2} name='In progress' taskList={temp[1]}/>*/}
-            {/*    <ColumnTasks id={3} name='Done' taskList={temp[2]}/>*/}
-            {/*</div>*/}
             <Grid className={classes.container} container justify="center" spacing={8}>
                 <Grid item xs={4} container justify="center">
                     <ColumnTasks id={1} name='To Do' taskList={temp[0]}/>

@@ -15,7 +15,6 @@ const useStyles = makeStyles({
     container: {
         backgroundColor: '#ddd',
         height: '100%',
-        // width: '100%',
     },
     list: {
         width: '100%',

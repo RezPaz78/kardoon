@@ -1,0 +1,604 @@
+@-webkit-keyframes action {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  15% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  25% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  35% {
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+  70% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  100% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+}
+
+@keyframes action {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  15% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  25% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  35% {
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+  70% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  100% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+}
+
+@-webkit-keyframes headerAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes headerAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: white;
+  position: relative;
+  z-index: -10;
+  font-family: Yekan;
+}
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.container--flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: inherit;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+@font-face {
+  font-family: Yekan;
+  src: url("../fonts/iranyekanwebregularfanum.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Yekan;
+  src: url("../fonts/iranyekanwebboldfanum.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Yekan;
+  src: url("../fonts/iranyekanweblightfanum.ttf") format("truetype");
+  font-weight: 300;
+}
+
+/**
+ * Basic typography style for copy text
+ */
+.header {
+  background: url("../svg/Cloudy.svg") center no-repeat;
+  background-size: cover;
+  direction: rtl;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-bottom: 10rem;
+  border-bottom: 2px solid white;
+  text-align: center;
+}
+
+.header > div {
+  margin-top: 5rem;
+}
+
+.header h1 {
+  font-family: Yekan;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: normal;
+  color: #363839;
+}
+
+.header p {
+  width: 50%;
+  margin: 1rem auto 3rem auto;
+  line-height: 2rem;
+}
+
+.header button {
+  background-color: #35b1a7;
+  border: none;
+  border: 2px solid #35b1a7;
+  padding: 1rem 2rem;
+  font-family: Yekan;
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: normal;
+  color: white;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.header button:hover {
+  background-color: transparent;
+  color: #363839;
+}
+
+.header button:focus {
+  outline: none;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 2rem 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 9999;
+  direction: rtl;
+}
+
+.navbar__logo a {
+  cursor: pointer;
+  font-family: Yekan;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: normal;
+  color: black;
+  text-decoration: none;
+}
+
+.navbar__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 25%;
+  direction: rtl;
+}
+
+.navbar__list a {
+  cursor: pointer;
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: black;
+  text-decoration: none;
+}
+
+.contact {
+  background-color: #89D0CA;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.contact__card {
+  background-color: white;
+  padding: 2rem 0;
+  -webkit-box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
+          box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.contact__card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.contact__form--name {
+  margin-bottom: 2rem;
+}
+
+.contact__form--name input {
+  width: 30%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 2px solid black;
+  direction: rtl;
+  font-family: Yekan;
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: normal;
+  color: black;
+}
+
+.contact__form--name input:focus {
+  outline: none;
+}
+
+.contact__form--name input::-webkit-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--name input:-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--name input::-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--name input::placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--email {
+  margin-bottom: 2rem;
+}
+
+.contact__form--email input {
+  width: 30%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 2px solid black;
+  direction: rtl;
+  font-family: Yekan;
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: normal;
+  color: black;
+}
+
+.contact__form--email input:focus {
+  outline: none;
+}
+
+.contact__form--email input::-webkit-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--email input:-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--email input::-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--email input::placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--message {
+  margin-bottom: 2rem;
+}
+
+.contact__form--message textarea {
+  width: 30%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 2px solid black;
+  direction: rtl;
+  font-family: Yekan;
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: normal;
+  color: black;
+}
+
+.contact__form--message textarea:focus {
+  outline: none;
+}
+
+.contact__form--message textarea::-webkit-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--message textarea:-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--message textarea::-ms-input-placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--message textarea::placeholder {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #748182;
+}
+
+.contact__form--button button {
+  display: inline-block;
+  padding: 10px 45px;
+  background: transparent;
+  border: 2px solid black;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-family: Yekan;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: normal;
+  color: black;
+  border-radius: 10px;
+}
+
+.contact__form--button button:hover {
+  background-color: black;
+  color: white;
+}
+
+.sample {
+  text-align: center;
+  padding: 4rem 0;
+  direction: rtl;
+}
+
+.sample h2 {
+  font-family: Yekan;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: normal;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+.sample__box {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.sample__box-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #748182;
+  margin: 1rem 0;
+  border-radius: 10px;
+  padding: 1rem;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.sample__box-item input[type="checkbox"] {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #363839;
+  border: 1px solid #bdc1c6;
+  border-radius: 4px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  cursor: pointer;
+  -webkit-transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+  transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+  margin-left: 1rem;
+}
+
+.sample__box-item input[type="checkbox"]::before {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 0px;
+  left: 6px;
+  width: 8px;
+  height: 14px;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  opacity: 0;
+}
+
+.sample__box-item input[type="checkbox"]:checked {
+  color: #fff;
+  border-color: #06842c;
+  background: #06842c;
+}
+
+.sample__box-item input[type="checkbox"]:checked::before {
+  opacity: 1;
+}
+
+.sample__box-item input[type="checkbox"]:checked ~ label::before {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.sample__box-item label {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding: 0 0.25em 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.sample__box-item label::before {
+  position: absolute;
+  content: attr(data-content);
+  color: #9c9e9f;
+  -webkit-clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+          clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  -webkit-text-decoration-color: #363839;
+          text-decoration-color: #363839;
+  -webkit-transition: -webkit-clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: -webkit-clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.features {
+  padding: 3rem 0;
+  text-align: center;
+  direction: rtl;
+}
+
+.features .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.features__item h3 {
+  font-family: Yekan;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: normal;
+  color: black;
+  margin: 1rem 0;
+}
+
+.features__item p {
+  font-family: Yekan;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: normal;
+  color: #363839;
+  padding: 0 1rem;
+}
+/*# sourceMappingURL=main.css.map */
