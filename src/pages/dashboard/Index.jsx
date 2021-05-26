@@ -3,6 +3,7 @@ import {DragDropContext} from "react-beautiful-dnd";
 import ColumnTasks from "./components/ColumnTasks";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
+import { useDashboard } from "../../services/context/dashboardContext/DashboardContext";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -10,7 +11,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Ali = () => {
+const Index = () => {
+
+    const [ dashboardState , dashboardDispatch] = useDashboard();
 
     const classes = useStyles();
 
@@ -42,13 +45,13 @@ const Ali = () => {
         <DragDropContext onDragEnd={()=> console.log('hey')}>
             <Grid className={classes.container} container justify="center" spacing={8}>
                 <Grid item xs={4} container justify="center">
-                    <ColumnTasks id={1} name='To Do' taskList={temp[0]}/>
+                    <ColumnTasks id={1} name='To Do' taskList={dashboardState.todoList}/>
                 </Grid>
                 <Grid item xs={4} container justify="center">
-                    <ColumnTasks id={2} name='In progress' taskList={temp[1]}/>
+                    <ColumnTasks id={2} name='In progress' taskList={dashboardState.inProgressList}/>
                 </Grid>
                 <Grid item xs={4} container justify="center">
-                    <ColumnTasks id={3} name='Done' taskList={temp[2]}/>
+                    <ColumnTasks id={3} name='Done' taskList={dashboardState.doneList}/>
                 </Grid>
             </Grid>
 
@@ -56,4 +59,4 @@ const Ali = () => {
     )
 };
 
-export default Ali;
+export default Index;

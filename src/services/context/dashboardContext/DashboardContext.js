@@ -8,14 +8,14 @@ export const DashboardInitialState = {
         {text: 'go to home', id: 4},
         {text: 'read a book', id: 5},
     ],
-    inProgress: [
+    inProgressList: [
         {text: 'go to school', id: 6},
         {text: 'go to gym', id: 7},
         {text: 'practise', id: 8},
         {text: 'go to home', id: 9},
         {text: 'read a book', id: 10},
     ],
-    done: [
+    doneList: [
         {text: 'go to school', id: 11},
         {text: 'go to gym', id: 12},
         {text: 'practise', id: 13},
