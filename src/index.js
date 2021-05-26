@@ -9,10 +9,11 @@ import "./assets/styles/landing.css";
 import "./assets/styles/index.css";
 
 // providers
+import DashboardProvider from "./services/context/dashboardContext/DashboardProvider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Compose>
+    <Compose component={[DashboardProvider]}>
       <App />
     </Compose>
   </BrowserRouter>,
