@@ -13,7 +13,7 @@ import DashboardProvider from "./services/context/dashboardContext/DashboardProv
 
 ReactDOM.render(
   <BrowserRouter>
-    <Compose component={[DashboardProvider]}>
+    <Compose components={[DashboardProvider]}>
       <App />
     </Compose>
   </BrowserRouter>,

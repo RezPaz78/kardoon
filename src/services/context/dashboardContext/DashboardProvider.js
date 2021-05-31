@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { DashboardContext, DashboardInitialState } from "./DashboardContext";
-import DashboardReducer from "./DasshboardReducer";
+import DashboardReducer from "./DashboardReducer";
 
 const DashboardProvider = (props) => {
     const [state, dispatch] = useReducer(DashboardReducer, DashboardInitialState);
