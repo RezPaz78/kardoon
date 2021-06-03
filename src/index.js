@@ -17,7 +17,7 @@ import RTLProvider from "./utils/RTLProvider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Compose component={[DashboardProvider]}>
+    <Compose components={[DashboardProvider]}>
       <ThemeProvider theme={theme}>
         <RTLProvider>
           <CssBaseline />

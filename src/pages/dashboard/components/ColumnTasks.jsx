@@ -12,12 +12,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ColumnTasks = ({id, name, taskList}) => {
+const ColumnTasks = ({id, name, type, taskList}) => {
 
     const classes = useStyles();
 
     return (
-        <Droppable droppableId={`droppable-${id}`}>
+        <Droppable droppableId={type}>
             {provided => (
                 <div
                     ref={provided.innerRef}
@@ -27,7 +27,7 @@ const ColumnTasks = ({id, name, taskList}) => {
                 >
                     <h3>{name}</h3>
                     {
-                        taskList.map(item => <Task key={item.id} id={item.id} text={item.text}/>)
+                        taskList.map((item, index) => <Task key={item.id} index={index} id={item.id} text={item.text}/>)
                     }
                     {provided.placeholder}
                 </div>
