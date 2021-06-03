@@ -171,11 +171,17 @@ body {
   line-height: 2rem;
 }
 
-.header button {
+.header__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 25%;
+}
+
+.header a {
   background-color: #35b1a7;
   border: none;
-  border: 2px solid #35b1a7;
-  padding: 1rem 2rem;
   font-family: Yekan;
   font-size: 1.2rem;
   font-weight: normal;
@@ -185,6 +191,12 @@ body {
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   border-radius: 10px;
+  text-decoration: none;
+  height: 4rem;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header button:hover {
