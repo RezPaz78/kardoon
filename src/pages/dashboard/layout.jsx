@@ -29,11 +29,11 @@ const Main = () => {
         <Grid item xs={12}>
           <NavBar />
         </Grid>
-        <Grid className={classes.sidebar} item xs={2} spacing={0}>
-          <SideBar />
-        </Grid>
         <Grid className={classes.content} item xs={10} spacing={0}>
           <Index />
+        </Grid>
+        <Grid className={classes.sidebar} item xs={2} spacing={0}>
+          <SideBar />
         </Grid>
       </Grid>
     </>

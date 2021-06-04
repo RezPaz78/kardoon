@@ -19,8 +19,26 @@ const DashboardReducer = (state, action) => {
                 ...state,
                 doneList: tempState.doneList,
             };
+        case "REMOVE-TODO":
+            tempState.todoList.splice(action.data.removeIndex, 1);
+            return {
+                ...state,
+                todoList: tempState.todoList,
+            };
+        case "REMOVE-IN-PROGRESS":
+            tempState.inProgressList.splice(action.data.removeIndex, 1);
+            return {
+                ...state,
+                inProgressList: tempState.inProgressList,
+            };
+        case "REMOVE-DONE":
+            tempState.doneList.splice(action.data.removeIndex, 1);
+            return {
+                ...state,
+                doneList: tempState.doneList,
+            };
         default:
-            return { ...state }
+            return {...state}
     }
 };
 

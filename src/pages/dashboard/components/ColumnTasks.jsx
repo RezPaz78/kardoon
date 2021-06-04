@@ -5,6 +5,8 @@ import Task from "./Task";
 
 const useStyles = makeStyles((theme) => ({
     columnTasks: {
+        width: '100%',
+        height: 'fit-content',
         padding: theme.spacing(2),
         borderRadius: '10px',
         boxShadow: '0 0 10px #ccc',
@@ -23,7 +25,6 @@ const ColumnTasks = ({id, name, type, taskList}) => {
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                     className={classes.columnTasks}
-                    style={{width: '100%'}}
                 >
                     <h3>{name}</h3>
                     {

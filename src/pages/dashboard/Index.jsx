@@ -31,13 +31,21 @@ const Index = () => {
                 selectedTask = dashboardState.doneList[result.source.index];
                 break;
         }
+
+        dashboardDispatch({
+            type: `REMOVE-${result.source.droppableId}`,
+            data: {
+                removeIndex: result.source.index,
+            }
+        });
+
         dashboardDispatch({
             type: `ADD-${result.destination.droppableId}`,
             data: {
                 task: selectedTask,
                 insertIndex: result.destination.index,
             }
-        })
+        });
     };
 
     return (
