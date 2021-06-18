@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import SideBar from "./components/SideBar";
 import Index from "./Index";
 import SEO from "../../components/seo";
+import TaskModal from "./components/TaskModal";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -35,6 +36,7 @@ const Main = () => {
         <Grid className={classes.sidebar} item xs={2} spacing={0}>
           <SideBar />
         </Grid>
+        <TaskModal/>
       </Grid>
     </>
   );

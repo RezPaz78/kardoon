@@ -14,10 +14,11 @@ import "./assets/styles/index.css";
 import DashboardProvider from "./services/context/dashboardContext/DashboardProvider";
 import { ThemeProvider } from "@material-ui/core";
 import RTLProvider from "./utils/RTLProvider";
+import TaskModalProvider from "./services/context/taskModalContext/TaskModalProvider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Compose components={[DashboardProvider]}>
+    <Compose components={[DashboardProvider, TaskModalProvider]}>
       <ThemeProvider theme={theme}>
         <RTLProvider>
           <CssBaseline />

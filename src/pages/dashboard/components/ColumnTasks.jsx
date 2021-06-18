@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px',
         boxShadow: '0 0 10px #ccc',
         backgroundColor: '#fafafa',
+    },
+    columnTitle: {
+        color: '#777',
+        marginBottom: theme.spacing(2),
     }
 }));
 
@@ -26,9 +30,9 @@ const ColumnTasks = ({id, name, type, taskList}) => {
                     {...provided.droppableProps}
                     className={classes.columnTasks}
                 >
-                    <h3>{name}</h3>
+                    <h2 className={classes.columnTitle}>{name}</h2>
                     {
-                        taskList.map((item, index) => <Task key={item.id} index={index} id={item.id} text={item.text}/>)
+                        taskList.map((item, index) => <Task key={item.id} index={index} id={item.id} title={item.title} description={item.description}/>)
                     }
                     {provided.placeholder}
                 </div>

@@ -7,7 +7,9 @@ import {useDashboard} from "../../services/context/dashboardContext/DashboardCon
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        padding: theme.spacing(2),
+        boxSizing:'border-box',
+        width: '100%',
+        margin: '0',
     },
 }));
 
@@ -58,23 +60,23 @@ const Index = () => {
             >
                 <Grid item xs={4} container justify="center">
                     <ColumnTasks
-                        name="To Do"
-                        type="TODO"
-                        taskList={dashboardState.todoList}
+                        name="انجام شده"
+                        type="DONE"
+                        taskList={dashboardState.doneList}
                     />
                 </Grid>
                 <Grid item xs={4} container justify="center">
                     <ColumnTasks
-                        name="In progress"
+                        name="در حال انجام"
                         type="IN-PROGRESS"
                         taskList={dashboardState.inProgressList}
                     />
                 </Grid>
                 <Grid item xs={4} container justify="center">
                     <ColumnTasks
-                        name="Done"
-                        type="DONE"
-                        taskList={dashboardState.doneList}
+                        name="انجام دادنی ها"
+                        type="TODO"
+                        taskList={dashboardState.todoList}
                     />
                 </Grid>
             </Grid>
