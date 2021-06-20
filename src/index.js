@@ -15,10 +15,13 @@ import DashboardProvider from "./services/context/dashboardContext/DashboardProv
 import { ThemeProvider } from "@material-ui/core";
 import RTLProvider from "./utils/RTLProvider";
 import TaskModalProvider from "./services/context/taskModalContext/TaskModalProvider";
+import ConfigProvider from "./utils/configProvider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Compose components={[DashboardProvider, TaskModalProvider]}>
+    <Compose
+      components={[DashboardProvider, TaskModalProvider, ConfigProvider]}
+    >
       <ThemeProvider theme={theme}>
         <RTLProvider>
           <CssBaseline />

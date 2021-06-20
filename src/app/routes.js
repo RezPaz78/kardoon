@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Route } from "react-router-dom";
+import PrivateRoute from "../components/privateRoute";
 
 const Dashboard = lazy(() => import("../pages/dashboard/layout"));
 const Landing = lazy(() => import("../pages/landing/index"));
@@ -21,6 +22,7 @@ export const routes = [
     component: SignIn,
   },
   {
+    isPrivate: true,
     path: "/dashboard",
     component: Dashboard,
   },
@@ -28,10 +30,18 @@ export const routes = [
 
 export const renderRoutes = (routes) => {
   return routes.map((route, key) => {
-    return (
-      <Route key={key} path={route.path} exact={route.exact}>
-        <route.component />
-      </Route>
-    );
+    if (route.isPrivate) {
+      return (
+        <PrivateRoute key={key} path={route.path} exact={route.exact}>
+          <route.component />
+        </PrivateRoute>
+      );
+    } else {
+      return (
+        <Route key={key} path={route.path} exact={route.exact}>
+          <route.component />
+        </Route>
+      );
+    }
   });
 };

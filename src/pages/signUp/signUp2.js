@@ -83,7 +83,6 @@ export default function SignInSide() {
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
-                  required
                   fullWidth
                   id="firstName"
                   label="نام"
@@ -93,7 +92,6 @@ export default function SignInSide() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   id="lastName"
                   label="نام خانوادگی"

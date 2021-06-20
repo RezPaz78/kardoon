@@ -4,8 +4,13 @@ import Pic2 from "../../assets/img/reporting.png";
 import Pic3 from "../../assets/img/security.png";
 import SEO from "../../components/seo";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../utils/hooks/useAuth";
 
 const Index = () => {
+  const isLoggedIn = useAuth();
+
+  console.log(isLoggedIn);
+
   return (
     <>
       <SEO title="کاردون" />

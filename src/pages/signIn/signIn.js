@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,6 +15,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link as RRDLink } from "react-router-dom";
 import TODO from "../../assets/img/todo.png";
 import SEO from "../../components/seo";
+import * as yup from "yup";
+import { useHistory } from "react-router-dom";
+import { axiosInstance } from "../../services/axios";
+
+let schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
 
 function Copyright() {
   return (
@@ -63,6 +71,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const history = useHistory();
+
+  const passHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    schema
+      .isValid({
+        email,
+        password,
+      })
+      .then((valid) => {
+        if (valid) {
+          axiosInstance
+            .post("/login", {
+              email,
+              password,
+            })
+            .then((res) => {
+              localStorage.setItem("token", res.data.token);
+              history.push("/");
+            })
+            .catch((error) => console.log(error));
+        }
+      });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -87,6 +129,7 @@ export default function SignInSide() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(event) => emailHandler(event)}
             />
             <TextField
               variant="outlined"
@@ -98,6 +141,7 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(event) => passHandler(event)}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -109,6 +153,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={submitHandler}
             >
               ورود
             </Button>
