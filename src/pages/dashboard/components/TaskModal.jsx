@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: 400,
+        width: "40%",
+        height: "40%",
         backgroundColor: theme.palette.background.paper,
         border: 'none',
         borderRadius: theme.spacing(2),
@@ -28,14 +29,6 @@ const useStyles = makeStyles((theme) => ({
     descriptionInput: {
         marginBottom: theme.spacing(2),
         width: '100%',
-    },
-    paper: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
     },
 }));
 
@@ -66,11 +59,11 @@ const TaskModal = () => {
                     id="outlined-multiline-static"
                     label="توضیحات"
                     multiline
-                    rows={4}
+                    rows={9}
                     defaultValue={taskModalState.task.description}
                     variant="outlined"
                 />
-                <Button variant="contained">ثبت تغییرات</Button>
+                <Button variant="contained">{taskModalState.canCreate ? 'ایجاد تسک' : 'ثبت تغییرات'}</Button>
             </div>
         </Modal>
     )

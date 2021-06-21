@@ -39,6 +39,7 @@ const Task = ({index, id, title, description}) => {
                     onClick={() => taskModalDispatch({
                         type: 'SHOW',
                         data: {
+                            canCreate: false,
                             task: {
                                 title,
                                 description
