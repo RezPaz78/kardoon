@@ -14,7 +14,6 @@ import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../services/axios";
 import { toast } from "react-toastify";
-import { useUser } from "../../services/context/userContext/userContext";
 
 let schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -71,7 +70,6 @@ export default function SignInSide() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const history = useHistory();
-  const [, userDispatch] = useUser();
 
   const passHandler = (e) => {
     setPassword(e.target.value);
@@ -96,12 +94,14 @@ export default function SignInSide() {
               password,
             })
             .then((res) => {
-              console.log(res);
               if (res.data.message === "اطلاعات وارد شده اشتباه است") {
                 toast.error(res.data.message);
               } else {
                 localStorage.setItem("token", res.data.token);
-                userDispatch({ type: "SET", payload: { user: res.data.user } });
+                localStorage.setItem("firstName", res.data.user.first_name);
+                localStorage.setItem("lastName", res.data.user.last_name);
+                localStorage.setItem("email", res.data.user.email);
+                localStorage.setItem("id", res.data.user.id);
                 toast.success(res.data.message);
                 history.push("/");
               }
@@ -120,9 +120,6 @@ export default function SignInSide() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          {/* <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar> */}
           <Typography component="h1" variant="h5">
             ورود
           </Typography>

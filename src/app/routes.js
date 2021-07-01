@@ -28,6 +28,7 @@ export const routes = [
     component: Dashboard,
   },
   {
+    isPrivate: true,
     path: "/profile",
     component: Profile,
   },

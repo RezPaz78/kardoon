@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
@@ -8,8 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TODO from "../../assets/img/todo2.jpg";
-import { Link as RRDLink } from "react-router-dom";
+import { Link as RRDLink, useHistory } from "react-router-dom";
 import SEO from "../../components/seo";
+import { axiosInstance } from "../../services/axios";
+import { toast } from "react-toastify";
 
 function Copyright() {
   return (
@@ -58,6 +60,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const history = useHistory();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
+    };
+    axiosInstance
+      .post("/register", data)
+      .then((res) => {
+        if (res.data.message === "ثبت‌نام با موفقیت انجام شد") {
+          toast.success(res.data.message);
+          history.push("/");
+        }
+      })
+      .catch((error) => toast.error("ثبت‌نام شما با خطا مواجه شده است!"));
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -71,7 +97,11 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             ثبت ‌نام
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={(event) => submitHandler(event)}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -82,6 +112,7 @@ export default function SignInSide() {
                   id="firstName"
                   label="نام"
                   autoFocus
+                  onChange={(event) => setFirstName(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -92,6 +123,7 @@ export default function SignInSide() {
                   label="نام خانوادگی"
                   name="lastName"
                   autoComplete="lname"
+                  onChange={(event) => setLastName(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,6 +135,7 @@ export default function SignInSide() {
                   label="ایمیل"
                   name="email"
                   autoComplete="email"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,6 +148,7 @@ export default function SignInSide() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </Grid>
             </Grid>

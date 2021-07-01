@@ -1,21 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Pic1 from "../../assets/img/collaboration.png";
 import Pic2 from "../../assets/img/reporting.png";
 import Pic3 from "../../assets/img/security.png";
 import SEO from "../../components/seo";
-import { Link } from "react-router-dom";
+import { Link as RRDLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import { useAuth } from "../../utils/hooks/useAuth";
-import { useUser } from "../../services/context/userContext/userContext";
+import { useLocalStorage } from "../../utils/hooks/useLocalStorage";
+import { axiosInstance } from "../../services/axios";
+import { toast } from "react-toastify";
 
 const Index = () => {
   const isLoggedIn = useAuth();
-  const [user] = useUser();
+  const firstName = useLocalStorage("firstName");
+  const lastName = useLocalStorage("lastName");
+  const token = useLocalStorage("token");
 
   console.log(isLoggedIn);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const logoutHandler = () => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axiosInstance.post("/logout", {}, config).then((res) => {
+      localStorage.clear();
+      toast.success("شما با موفقیت خارج شدید!");
+      window.location.reload();
+    });
+  };
 
   return (
     <>
@@ -34,6 +49,16 @@ const Index = () => {
           <a href="#contact" className="navbar__list-item">
             ارتباط با ما
           </a>
+          {isLoggedIn && (
+            <>
+              <Link component={RRDLink} to={"/profile"}>
+                {firstName + " " + lastName}
+              </Link>
+              <Link component={RRDLink} to={"/dashboard"}>
+                داشبورد!
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
@@ -47,8 +72,25 @@ const Index = () => {
             راحت و به سادگی به کارش برسه و خروجی بیشتری داشته باشه.
           </p>
           <div className="header__buttons">
-            <Link to={"/signUp"}>ثبت نام</Link>
-            <Link to={"/signIn"}>ورود</Link>
+            {!isLoggedIn ? (
+              <>
+                <Link component={RRDLink} to={"/signUp"}>
+                  ثبت نام
+                </Link>
+                <Link component={RRDLink} to={"/signIn"}>
+                  ورود
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link component={RRDLink} to={"/dashboard"}>
+                  داشبورد
+                </Link>
+                <button onClick={logoutHandler}>
+                  خروج
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
