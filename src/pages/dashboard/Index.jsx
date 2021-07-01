@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = () => {
   const [dashboardState, dashboardDispatch] = useDashboard();
-
   const classes = useStyles();
 
   const handleOnDragEnd = (result) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = (props) => {
-  if (localStorage) {
+  if (!localStorage.getItem("token")) {
     return <Redirect to="/signIn" />;
   } else {
     return (

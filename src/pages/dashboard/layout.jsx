@@ -36,7 +36,7 @@ const Main = () => {
         <Grid className={classes.sidebar} item xs={2} spacing={0}>
           <SideBar />
         </Grid>
-        <TaskModal/>
+        <TaskModal />
       </Grid>
     </>
   );
