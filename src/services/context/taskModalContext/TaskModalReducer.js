@@ -1,5 +1,4 @@
 const TaskModalReducer = (state, action) => {
-    let tempState = state;
     switch (action.type) {
         case "SHOW":
             console.log(action);

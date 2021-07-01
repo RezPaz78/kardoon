@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Task = ({index, id, title, description}) => {
 
-    const [taskModalState, taskModalDispatch] = useTaskModal();
+    const [, taskModalDispatch] = useTaskModal();
 
     const classes = useStyles();
 

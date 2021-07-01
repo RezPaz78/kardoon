@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Pic1 from "../../assets/img/collaboration.png";
 import Pic2 from "../../assets/img/reporting.png";
 import Pic3 from "../../assets/img/security.png";
 import SEO from "../../components/seo";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../utils/hooks/useAuth";
+import { useUser } from "../../services/context/userContext/userContext";
 
 const Index = () => {
+  const isLoggedIn = useAuth();
+  const [user] = useUser();
+
+  console.log(isLoggedIn);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <>
       <SEO title="کاردون" />
       <nav className="navbar">
         <div className="navbar__logo">
-          <a href="#">کاردون</a>
+          <Link to="/">کاردون</Link>
         </div>
         <div className="navbar__list">
           <a href="#features" className="navbar__list-item">
