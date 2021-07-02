@@ -42,7 +42,8 @@ const Task = ({index, id, title, description}) => {
                             canCreate: false,
                             task: {
                                 title,
-                                description
+                                description,
+                                id
                             }
                         }
                     })}

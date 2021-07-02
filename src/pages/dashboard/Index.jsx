@@ -44,6 +44,10 @@ const Index = () => {
       .catch((error) =>
         toast.error("بازیابی تسک‌ها با مشکل رو به رو شده است!")
       );
+
+    return () => {
+      dashboardDispatch({ type: "RESET" });
+    };
   }, [dashboardDispatch, token]);
 
   const handleOnDragEnd = (result) => {
@@ -64,6 +68,7 @@ const Index = () => {
         break;
     }
 
+    let status = result.destination.droppableId;
     dashboardDispatch({
       type: `REMOVE-${result.source.droppableId}`,
       data: {
@@ -72,12 +77,36 @@ const Index = () => {
     });
 
     dashboardDispatch({
-      type: `ADD-${result.destination.droppableId}`,
+      type: `ADD-${status}`,
       data: {
         task: selectedTask,
         insertIndex: result.destination.index,
       },
     });
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    status = status.toLowerCase();
+    status = status.replace("-", " ");
+    let data = {
+      status,
+      _method: "PUT",
+    };
+    axiosInstance
+      .post(`/task/${selectedTask.id}`, data, config)
+      .then((res) => {
+        if (res.data.message === "تسک با موفقیت بروز شد") {
+          toast.success("ویرایش تسک با موفقیت انجام شد!");
+        }
+      })
+      .catch((error) => {
+        toast.error("ویرایش تسک با خطا مواجه شد!");
+        window.location.reload();
+      });
   };
 
   return (

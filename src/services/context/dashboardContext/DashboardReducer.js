@@ -48,6 +48,12 @@ const DashboardReducer = (state, action) => {
         inProgressList: action.data.inProgress,
         todoList: action.data.todo,
       };
+    case "RESET":
+      return {
+        todoList: [],
+        inProgressList: [],
+        doneList: [],
+      };
     default:
       return { ...state };
   }

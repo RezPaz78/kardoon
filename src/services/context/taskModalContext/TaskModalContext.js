@@ -1,12 +1,13 @@
 import { createContext, useContext } from "react";
 
 export const TaskModalInitialState = {
-    show: false,
-    canCreate: false,
-    task: {
-        title: '',
-        description: '',
-    }
+  show: false,
+  canCreate: false,
+  task: {
+    title: "",
+    description: "",
+    id: null,
+  },
 };
 
 export const TaskModalContext = createContext(TaskModalInitialState);

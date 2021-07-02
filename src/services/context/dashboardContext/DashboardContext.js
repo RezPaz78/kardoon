@@ -1,9 +1,12 @@
 import { createContext, useContext } from "react";
 
 export const DashboardInitialState = {
-  todoList: [],
-  inProgressList: [],
-  doneList: [],
+    todoList : [
+    ],
+    inProgressList: [
+    ],
+    doneList: [
+    ],
 };
 
 export const DashboardContext = createContext(DashboardInitialState);
