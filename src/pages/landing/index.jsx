@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Pic1 from "../../assets/img/collaboration.png";
 import Pic2 from "../../assets/img/reporting.png";
 import Pic3 from "../../assets/img/security.png";
@@ -12,11 +12,18 @@ import { toast } from "react-toastify";
 
 const Index = () => {
   const isLoggedIn = useAuth();
-  const firstName = useLocalStorage("firstName");
-  const lastName = useLocalStorage("lastName");
+  const id = useLocalStorage("id");
   const token = useLocalStorage("token");
+  const [user, setUser] = useState();
 
-  console.log(isLoggedIn);
+  useEffect(() => {
+    if (isLoggedIn) {
+      axiosInstance
+        .get(`/user/${id}`)
+        .then((res) => setUser(res.data))
+        .catch((error) => console.log(error));
+    }
+  }, [id, isLoggedIn]);
 
   const logoutHandler = () => {
     const config = {
@@ -49,10 +56,10 @@ const Index = () => {
           <a href="#contact" className="navbar__list-item">
             ارتباط با ما
           </a>
-          {isLoggedIn && (
+          {isLoggedIn && user && (
             <>
               <Link component={RRDLink} to={"/profile"}>
-                {firstName + " " + lastName}
+                {user.first_name + " " + user.last_name}
               </Link>
               <Link component={RRDLink} to={"/dashboard"}>
                 داشبورد!
@@ -86,9 +93,7 @@ const Index = () => {
                 <Link component={RRDLink} to={"/dashboard"}>
                   داشبورد
                 </Link>
-                <button onClick={logoutHandler}>
-                  خروج
-                </button>
+                <button onClick={logoutHandler}>خروج</button>
               </>
             )}
           </div>

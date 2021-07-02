@@ -98,9 +98,6 @@ export default function SignInSide() {
                 toast.error(res.data.message);
               } else {
                 localStorage.setItem("token", res.data.token);
-                localStorage.setItem("firstName", res.data.user.first_name);
-                localStorage.setItem("lastName", res.data.user.last_name);
-                localStorage.setItem("email", res.data.user.email);
                 localStorage.setItem("id", res.data.user.id);
                 toast.success(res.data.message);
                 history.push("/");

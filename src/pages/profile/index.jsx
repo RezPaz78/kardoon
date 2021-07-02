@@ -9,6 +9,7 @@ import Link from "@material-ui/core/Link";
 import { useLocalStorage } from "../../utils/hooks/useLocalStorage";
 import { axiosInstance } from "../../services/axios";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   profilePage: {
@@ -53,11 +54,22 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = () => {
   const classes = useStyles();
-  const [firstName, setFirstName] = useState(useLocalStorage("firstName"));
-  const [lastName, setLastName] = useState(useLocalStorage("lastName"));
-  const [email, setEmail] = useState(useLocalStorage("email"));
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
   const id = useLocalStorage("id");
   const token = useLocalStorage("token");
+
+  useEffect(() => {
+    axiosInstance
+      .get(`/user/${id}`)
+      .then((res) => {
+        setEmail(res.data.email);
+        setFirstName(res.data.first_name);
+        setLastName(res.data.last_name);
+      })
+      .catch((error) => toast.error("!بازیابی اطلاعات شما با خطا مواجه شد"));
+  }, [id]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -77,9 +89,6 @@ const Index = () => {
       .then((res) => {
         if (res.data.message === "کاربر با موفقیت ویرایش شد") {
           toast.success(res.data.message);
-          localStorage.setItem("firstName", firstName);
-          localStorage.setItem("lastName", lastName);
-          localStorage.setItem("email", email);
         }
       })
       .catch((error) => toast.error("ویرایش کاربر با خطا مواجه شد!"));
@@ -101,39 +110,43 @@ const Index = () => {
           />
         </div>
 
-        <div className={classes.profileRow}>
-          <TextField
-            className={classes.nameInput}
-            required
-            id="outlined-required"
-            label="نام"
-            defaultValue="Hello World"
-            variant="outlined"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="نام خانوادگی"
-            defaultValue="Hello World"
-            variant="outlined"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div className={classes.profileRow}>
-          <TextField
-            className={classes.emailInput}
-            required
-            id="outlined-required"
-            label="ایمیل"
-            defaultValue="Hello World"
-            variant="outlined"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        {email && firstName && lastName && (
+          <>
+            <div className={classes.profileRow}>
+              <TextField
+                className={classes.nameInput}
+                required
+                id="outlined-required"
+                label="نام"
+                defaultValue="Hello World"
+                variant="outlined"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <TextField
+                required
+                id="outlined-required"
+                label="نام خانوادگی"
+                defaultValue="Hello World"
+                variant="outlined"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div className={classes.profileRow}>
+              <TextField
+                className={classes.emailInput}
+                required
+                id="outlined-required"
+                label="ایمیل"
+                defaultValue="Hello World"
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </>
+        )}
 
         <div>
           <Button

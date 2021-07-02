@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import ColumnTasks from "./components/ColumnTasks";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDashboard } from "../../services/context/dashboardContext/DashboardContext";
+import { axiosInstance } from "../../services/axios";
+import { toast } from "react-toastify";
+import { useLocalStorage } from "../../utils/hooks/useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -16,6 +19,32 @@ const useStyles = makeStyles((theme) => ({
 const Index = () => {
   const [dashboardState, dashboardDispatch] = useDashboard();
   const classes = useStyles();
+  const token = useLocalStorage("token");
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axiosInstance
+      .get("/task", config)
+      .then((res) => {
+        const tasks = res.data;
+        dashboardDispatch({
+          type: "SET-TASKS",
+          data: {
+            todo: tasks.todo,
+            inProgress: tasks.in_progress,
+            done: tasks.done,
+          },
+        });
+      })
+      .catch((error) =>
+        toast.error("بازیابی تسک‌ها با مشکل رو به رو شده است!")
+      );
+  }, [dashboardDispatch, token]);
 
   const handleOnDragEnd = (result) => {
     let selectedTask;
