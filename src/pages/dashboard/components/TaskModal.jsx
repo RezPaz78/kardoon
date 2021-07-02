@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { axiosInstance } from "../../../services/axios";
 import { useLocalStorage } from "../../../utils/hooks/useLocalStorage";
 import { toast } from "react-toastify";
-import { useDashboard } from "../../../services/context/dashboardContext/DashboardContext";
 
 const useStyles = makeStyles((theme) => ({
   modalBody: {
@@ -38,12 +37,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     width: "50%",
-  }
+  },
 }));
 
 const TaskModal = () => {
   const [taskModalState, taskModalDispatch] = useTaskModal();
-  const [dashboard, dashboardDispatch] = useDashboard();
   const classes = useStyles();
   const token = useLocalStorage("token");
   const [taskTitle, setTaskTitle] = useState();
@@ -93,6 +91,18 @@ const TaskModal = () => {
     }
   };
 
+  const deleteTaskHandler = () => {
+    axiosInstance
+      .delete(`/task/${taskModalState.task.id}`)
+      .then((res) => {
+        if (res.data.message === "تسک با موفقیت حذف شد") {
+          toast.success(res.data.message);
+          window.location.reload();
+        }
+      })
+      .catch((error) => toast.error("حذف تسک با خطا مواجه شد!"));
+  };
+
   return (
     <Modal
       open={taskModalState.show}
@@ -124,16 +134,16 @@ const TaskModal = () => {
           <Button variant="contained" onClick={taskSubmitHandler}>
             {taskModalState.canCreate ? "ایجاد تسک" : "ثبت تغییرات"}
           </Button>
-          {
-            taskModalState.canCreate ?
-                null
-                :
-                <Button variant="contained" color="secondary">
-                  حذف تسک
-                </Button>
-          }
+          {taskModalState.canCreate ? null : (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={deleteTaskHandler}
+            >
+              حذف تسک
+            </Button>
+          )}
         </div>
-
       </div>
     </Modal>
   );
