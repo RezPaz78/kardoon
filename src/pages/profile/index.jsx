@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import { theme } from "../../utils/theme";
-import { Link as RRDLink } from "react-router-dom";
+import { Link as RRDLink, useHistory } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import { useLocalStorage } from "../../utils/hooks/useLocalStorage";
 import { axiosInstance } from "../../services/axios";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+
 
 const useStyles = makeStyles((theme) => ({
   profilePage: {
@@ -20,12 +20,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   profileContainer: {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
     width: "50%",
     height: "50%",
+    minHeight: "25rem",
     border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: "1rem",
     padding: "2rem",
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "100%",
     width: "fit-content",
     height: "fit-content",
+    marginBottom: "1rem"
   },
   profileRow: {
     textAlign: "left",
@@ -43,13 +46,20 @@ const useStyles = makeStyles((theme) => ({
   },
   nameInput: {
     marginRight: "1rem",
+    marginBottom: "1rem"
   },
   emailInput: {
     width: "100%",
+    marginBottom: "1rem"
   },
   submitButton: {
     color: "white",
   },
+  homeButton: {
+    position: 'absolute',
+    right: '1rem',
+    top: '1rem',
+  }
 }));
 
 const Index = () => {
@@ -59,6 +69,7 @@ const Index = () => {
   const [email, setEmail] = useState();
   const id = useLocalStorage("id");
   const token = useLocalStorage("token");
+  const history = useHistory();
 
   useEffect(() => {
     axiosInstance
@@ -92,6 +103,20 @@ const Index = () => {
         }
       })
       .catch((error) => toast.error("ویرایش کاربر با خطا مواجه شد!"));
+  };
+
+  const logoutHandler = () => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axiosInstance.post("/logout", {}, config).then((res) => {
+      localStorage.clear();
+      toast.success("شما با موفقیت خارج شدید!");
+      history.push('/');
+    });
   };
 
   return (
@@ -157,9 +182,18 @@ const Index = () => {
           >
             ثبت
           </Button>
-          <Link variant="contained" component={RRDLink} to="/">
-            صفحه‌ی اصلی
-          </Link>
+          <div className={classes.homeButton}>
+            <Link variant="contained" component={RRDLink} to="/" >
+              صفحه‌ی اصلی
+            </Link>
+            <Button
+                color="secondary"
+                type="button"
+                onClick={logoutHandler}
+            >
+              خروج
+            </Button>
+          </div>
         </div>
       </form>
     </div>

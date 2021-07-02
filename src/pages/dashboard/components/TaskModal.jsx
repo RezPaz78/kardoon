@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     width: "40%",
-    height: "40%",
+    height: "fit-content",
     backgroundColor: theme.palette.background.paper,
     border: "none",
     borderRadius: theme.spacing(2),
@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     width: "100%",
   },
+  buttonsDiv: {
+    display: "flex",
+    justifyContent: "space-around",
+    width: "50%",
+  }
 }));
 
 const TaskModal = () => {
@@ -115,9 +120,20 @@ const TaskModal = () => {
           variant="outlined"
           onChange={(e) => setTaskDes(e.target.value)}
         />
-        <Button variant="contained" onClick={taskSubmitHandler}>
-          {taskModalState.canCreate ? "ایجاد تسک" : "ثبت تغییرات"}
-        </Button>
+        <div className={classes.buttonsDiv}>
+          <Button variant="contained" onClick={taskSubmitHandler}>
+            {taskModalState.canCreate ? "ایجاد تسک" : "ثبت تغییرات"}
+          </Button>
+          {
+            taskModalState.canCreate ?
+                null
+                :
+                <Button variant="contained" color="secondary">
+                  حذف تسک
+                </Button>
+          }
+        </div>
+
       </div>
     </Modal>
   );
