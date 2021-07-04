@@ -10,7 +10,6 @@ import { useLocalStorage } from "../../utils/hooks/useLocalStorage";
 import { axiosInstance } from "../../services/axios";
 import { toast } from "react-toastify";
 
-
 const useStyles = makeStyles((theme) => ({
   profilePage: {
     display: "flex",
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "100%",
     width: "fit-content",
     height: "fit-content",
-    marginBottom: "1rem"
+    marginBottom: "1rem",
   },
   profileRow: {
     textAlign: "left",
@@ -46,27 +45,27 @@ const useStyles = makeStyles((theme) => ({
   },
   nameInput: {
     marginRight: "1rem",
-    marginBottom: "1rem"
+    marginBottom: "1rem",
   },
   emailInput: {
     width: "100%",
-    marginBottom: "1rem"
+    marginBottom: "1rem",
   },
   submitButton: {
     color: "white",
   },
   homeButton: {
-    position: 'absolute',
-    right: '1rem',
-    top: '1rem',
-  }
+    position: "absolute",
+    right: "1rem",
+    top: "1rem",
+  },
 }));
 
 const Index = () => {
   const classes = useStyles();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const id = useLocalStorage("id");
   const token = useLocalStorage("token");
   const history = useHistory();
@@ -115,8 +114,25 @@ const Index = () => {
     axiosInstance.post("/logout", {}, config).then((res) => {
       localStorage.clear();
       toast.success("شما با موفقیت خارج شدید!");
-      history.push('/');
+      history.push("/");
     });
+  };
+
+  const deleteUserHandler = () => {
+    if (window.confirm("حساب کاربری شما پاک خواهد شد. مطمئن هستید؟")) {
+      localStorage.clear();
+      axiosInstance
+        .delete(`/user/${id}`)
+        .then((res) => {
+          if (res.data.message === "کاربر با موفقیت حذف شد") {
+            toast.success(res.data.message);
+          }
+        })
+        .catch((error) => toast.error("حذف حساب کاربری با خطا مواجه شد!"));
+      history.push("/");
+    } else {
+      return;
+    }
   };
 
   return (
@@ -135,7 +151,7 @@ const Index = () => {
           />
         </div>
 
-        {email && firstName && lastName && (
+        {
           <>
             <div className={classes.profileRow}>
               <TextField
@@ -143,7 +159,6 @@ const Index = () => {
                 required
                 id="outlined-required"
                 label="نام"
-                defaultValue="Hello World"
                 variant="outlined"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -152,7 +167,6 @@ const Index = () => {
                 required
                 id="outlined-required"
                 label="نام خانوادگی"
-                defaultValue="Hello World"
                 variant="outlined"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -164,14 +178,13 @@ const Index = () => {
                 required
                 id="outlined-required"
                 label="ایمیل"
-                defaultValue="Hello World"
                 variant="outlined"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </>
-        )}
+        }
 
         <div>
           <Button
@@ -183,14 +196,19 @@ const Index = () => {
             ثبت
           </Button>
           <div className={classes.homeButton}>
-            <Link variant="contained" component={RRDLink} to="/" >
-              صفحه‌ی اصلی
-            </Link>
+            <Button>
+              <Link variant="contained" component={RRDLink} to="/">
+                صفحه‌ی اصلی
+              </Link>
+            </Button>
             <Button
-                color="secondary"
-                type="button"
-                onClick={logoutHandler}
+              type="button"
+              onClick={deleteUserHandler}
+              style={{ margin: "0 1rem" }}
             >
+              حذف حساب کاربری
+            </Button>
+            <Button color="secondary" type="button" onClick={logoutHandler}>
               خروج
             </Button>
           </div>

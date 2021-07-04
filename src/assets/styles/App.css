@@ -41,3 +41,7 @@
   font-family: Yekan;
   font-size: 1rem;
 }
+
+.MuiTypography-root:hover {
+  text-decoration: none !important;
+}
